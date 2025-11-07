@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import FoodFilter from './FoodFilter';
+import CartSidebar from './CartSidebar';
 
-// ========== CATEGORIES / ITEMS (each item now has a `type`: 'veg' | 'nonveg' | 'mixed') ==========
+// ========== CATEGORIES / ITEMS ==========
 const CATEGORIES = [
   {
     id: 1,
     name: "Whopper",
-    emoji: "🍔",
     image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=150&h=150&fit=crop&crop=center",
     items: [
       {
@@ -38,7 +38,6 @@ const CATEGORIES = [
   {
     id: 2,
     name: "Chicken",
-    emoji: "🍗",
     image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=150&h=150&fit=crop&crop=center",
     items: [
       {
@@ -70,7 +69,6 @@ const CATEGORIES = [
   {
     id: 3,
     name: "Sides",
-    emoji: "🍟",
     image: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?w=150&h=150&fit=crop&crop=center",
     items: [
       {
@@ -102,7 +100,6 @@ const CATEGORIES = [
   {
     id: 4,
     name: "Drinks",
-    emoji: "🥤",
     image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=150&h=150&fit=crop&crop=center",
     items: [
       {
@@ -134,7 +131,6 @@ const CATEGORIES = [
   {
     id: 5,
     name: "Desserts",
-    emoji: "🍰",
     image: "https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?w=150&h=150&fit=crop&crop=center",
     items: [
       {
@@ -166,7 +162,6 @@ const CATEGORIES = [
   {
     id: 6,
     name: "Deals",
-    emoji: "🎁",
     image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=150&h=150&fit=crop&crop=center",
     items: [
       {
@@ -198,7 +193,6 @@ const CATEGORIES = [
   {
     id: 7,
     name: "Salads",
-    emoji: "🥗",
     image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=150&h=150&fit=crop&crop=center",
     items: [
       {
@@ -213,7 +207,8 @@ const CATEGORIES = [
   }
 ];
 
-// ========== useCart hook (kept same as your code) ==========
+
+// ========== useCart hook ==========
 const useCart = () => {
   const [cart, setCart] = useState([]);
 
@@ -267,7 +262,7 @@ const useCart = () => {
   };
 };
 
-// ========== Subcomponents (CategoryButton, Navigation, Menu Items etc.) ==========
+// ========== Subcomponents ==========
 const CategoryButton = ({ category, isActive, onClick }) => (
   <button
     onClick={onClick}
@@ -449,123 +444,6 @@ const MenuItemsGrid = ({ categories, activeCategory, onAddToCart, filter }) => {
   );
 };
 
-const CartItem = ({ item, onUpdateQuantity, onRemove }) => (
-  <div className="flex items-center space-x-4 bg-gray-50 rounded-xl p-4 border border-gray-200">
-    <img 
-      src={item.image} 
-      alt={item.name}
-      className="w-16 h-16 rounded-lg object-cover"
-      loading="lazy"
-    />
-    <div className="flex-1">
-      <h4 className="font-semibold text-gray-800">{item.name}</h4>
-      <p className="text-red-600 font-bold">${item.price}</p>
-    </div>
-    <div className="flex items-center space-x-2">
-      <button 
-        onClick={() => onUpdateQuantity(item.name, Math.max((item.quantity || 1) - 1, 0))}
-        className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors"
-        aria-label={`Decrease ${item.name}`}
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-        </svg>
-      </button>
-      <span className="w-8 text-center font-semibold">{item.quantity}</span>
-      <button 
-        onClick={() => onUpdateQuantity(item.name, (item.quantity || 1) + 1)}
-        className="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center hover:bg-amber-500 transition-colors"
-        aria-label={`Increase ${item.name}`}
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-        </svg>
-      </button>
-    </div>
-  </div>
-);
-
-const CartSidebar = ({ isOpen, onClose, cart, onUpdateQuantity, onRemove, getTotalPrice }) => {
-  const [mounted, setMounted] = useState(isOpen);
-
-  useEffect(() => {
-    let unmountTimer;
-    if (isOpen) {
-      setMounted(true);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-      unmountTimer = setTimeout(() => setMounted(false), 320);
-    }
-    return () => {
-      if (unmountTimer) clearTimeout(unmountTimer);
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  if (!mounted) return null;
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-hidden={!isOpen}
-      className={`fixed inset-0 bg-black/50 z-50 flex justify-end transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-    >
-      <div className={`bg-white w-full max-w-md h-full shadow-2xl transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="p-6 h-full flex flex-col">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Your Order</h2>
-            <button
-              onClick={onClose}
-              className="text-gray-500 hover:text-red-600 transition-colors"
-              aria-label="Close cart"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto">
-            {cart.length === 0 ? (
-              <div className="text-center text-gray-500 py-12">
-                <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <p>Your cart is empty</p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {cart.map((item, index) => (
-                  <CartItem
-                    key={`${item.name}-${index}`}
-                    item={item}
-                    onUpdateQuantity={onUpdateQuantity}
-                    onRemove={onRemove}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-
-          {cart.length > 0 && (
-            <div className="border-t border-gray-200 pt-4">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-lg font-semibold">Total:</span>
-                <span className="text-2xl font-bold text-red-600">${getTotalPrice()}</span>
-              </div>
-              <button className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                Checkout Now
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const FloatingCartButton = ({ itemCount, onClick }) => (
   <button 
     onClick={onClick}
@@ -596,7 +474,7 @@ const PromotionalBanner = () => (
 const MenuComponent = () => {
   const [activeCategory, setActiveCategory] = useState(0);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [filter, setFilter] = useState('all'); // <-- hook for veg/nonveg/all
+  const [filter, setFilter] = useState('all');
   const scrollContainerRef = useRef(null);
 
   const {
@@ -622,18 +500,17 @@ const MenuComponent = () => {
 
   const handleCategoryChange = useCallback((index) => {
     setActiveCategory(index);
-    // reset filter or keep it? we keep current filter — user might want to persist selection
   }, []);
 
   const handleAddToCart = useCallback((item) => {
     addToCart(item);
+    setIsCartOpen(true);
   }, [addToCart]);
 
   const handleUpdateQuantity = useCallback((itemName, quantity) => {
     updateQuantity(itemName, quantity);
   }, [updateQuantity]);
 
-  // filter change from FoodFilter
   const handleFilterChange = useCallback((newFilter) => {
     setFilter(newFilter);
   }, []);
@@ -642,14 +519,13 @@ const MenuComponent = () => {
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-red-50">
       <PromotionalBanner />
 
-      <div className="pt-14"> {/* spacing for fixed banner */}
+      <div className="pt-14">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="hidden md:flex items-center">
             <FoodFilter onFilterChange={handleFilterChange} />
           </div>
         </div>
 
-        {/* Desktop category nav (shows on md+) */}
         <DesktopCategoryNavigation
           categories={CATEGORIES}
           activeCategory={activeCategory}
@@ -660,19 +536,16 @@ const MenuComponent = () => {
         />
 
         <div className="relative">
-          {/* Mobile category nav + mobile filter */}
           <MobileCategoryNavigation
             categories={CATEGORIES}
             activeCategory={activeCategory}
             onCategoryChange={handleCategoryChange}
           />
 
-          {/* Mobile filter below top bar */}
           <div className="md:hidden container mx-auto px-6 py-4">
             <FoodFilter onFilterChange={handleFilterChange} />
           </div>
 
-          {/* Menu items grid with filter */}
           <MenuItemsGrid
             categories={CATEGORIES}
             activeCategory={activeCategory}
@@ -691,13 +564,12 @@ const MenuComponent = () => {
         getTotalPrice={getTotalPrice}
       />
 
-      {/* Floating cart button */}
-      {cart.length > 0 && !isCartOpen && (
+      {/* {cart.length > 0 && !isCartOpen && (
         <FloatingCartButton
           itemCount={getTotalItems()}
           onClick={() => setIsCartOpen(true)}
         />
-      )}
+      )} */}
     </div>
   );
 };
