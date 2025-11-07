@@ -1,13 +1,17 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import MenuComponent from "../Component/Customer_Pannel/MenuComponent"
+
 function App() {
-
-
+  // Add at top of file:
+  // import { BrowserRouter, Routes, Route } from "react-router-dom";
   return (
-    <>
-      <div className="text-3xl font-bold underline text-red-500">
-        <p>Tanmay sharma</p>
-
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MenuComponent />} />
+        {/* <Route path="/menu" element={<MenuComponent />} /> */}
+        <Route path="*" element={<div>404 - Not Found</div>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
