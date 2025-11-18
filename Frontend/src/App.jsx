@@ -6,7 +6,7 @@ import Header from "../Component/Restuaurant_Pannel/Header";
 import Dashboard from "../Component/Restuaurant_Pannel/Dashboard";
 import OrdersManagement from "../Component/Restuaurant_Pannel/OrdersManagement";
 import MenuManagement from "../Component/Restuaurant_Pannel/MenuManagement";
-// import EarningsReports from "./pages/EarningsReports";
+import EarningsDashboard from "../Component/Restuaurant_Pannel/Earnings";
 import Settings from "../Component/Restuaurant_Pannel/Settings";
 import MenuComponent from "../Component/Customer_Pannel/MenuComponent";
 
@@ -34,7 +34,7 @@ function AppContent() {
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/orders" element={<OrdersManagement />} />
             <Route path="/admin/menu" element={<MenuManagement />} />
-            {/* <Route path="/admin/earnings" element={<EarningsReports />} /> */}
+            <Route path="/admin/earnings" element={<EarningsDashboard />} />
             <Route path="/admin/settings" element={<Settings />} />
 
             {/* Fallback Route */}

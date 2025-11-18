@@ -1,15 +1,27 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+// Feather-like inline icons
+const Icon = ({ className = "w-5 h-5", children }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    {children}
+  </svg>
+);
+const FiHome = (p) => <Icon {...p}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></Icon>;
+const FiShoppingCart = (p) => <Icon {...p}><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></Icon>;
+const FiCoffee = (p) => <Icon {...p}><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></Icon>;
+const FiDollarSign = (p) => <Icon {...p}><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 7a5 5 0 0 0-10 0c0 5 10 3 10 8a5 5 0 0 1-10 0"/></Icon>;
+const FiSettings = (p) => <Icon {...p}><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m5.7-13.7l-4.2 4.2m-4.2 4.2L4.3 18.3M23 12h-6m-6 0H1m18.7-.7l-4.2 4.2m-4.2-4.2L4.3 5.7"/></Icon>;
+
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   
   const menuItems = [
-    { id: 'dashboard', name: 'Dashboard', icon: '📊', path: '/admin/dashboard' },
-    { id: 'orders', name: 'Orders', icon: '🧾', path: '/admin/orders' },
-    { id: 'menu', name: 'Menu', icon: '🍕', path: '/admin/menu' },
-    { id: 'earnings', name: 'Earnings', icon: '💰', path: '/admin/earnings' },
-    { id: 'settings', name: 'Settings', icon: '⚙️', path: '/admin/settings' },
+    { id: 'dashboard', name: 'Dashboard', icon: <FiHome className="w-5 h-5" />, path: '/admin/dashboard' },
+    { id: 'orders', name: 'Orders', icon: <FiShoppingCart className="w-5 h-5" />, path: '/admin/orders' },
+    { id: 'menu', name: 'Menu', icon: <FiCoffee className="w-5 h-5" />, path: '/admin/menu' },
+    { id: 'earnings', name: 'Earnings', icon: <FiDollarSign className="w-5 h-5" />, path: '/admin/earnings' },
+    { id: 'settings', name: 'Settings', icon: <FiSettings className="w-5 h-5" />, path: '/admin/settings' },
   ];
 
   return (
