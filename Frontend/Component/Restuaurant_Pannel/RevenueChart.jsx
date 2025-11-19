@@ -36,7 +36,7 @@ const RevenueChart = ({ darkMode }) => {
             <div key={index} className="flex flex-col items-center space-y-2 flex-1">
               <div className="flex flex-col items-center justify-end h-24 w-full">
                 <div 
-                  className="w-3/4 bg-gradient-to-t from-blue-500 to-purple-500 rounded-t-lg transition-all duration-300 hover:opacity-80 cursor-pointer"
+                  className="w-3/4 bg-linear-to-t from-blue-500 to-purple-500 rounded-t-lg transition-all duration-300 hover:opacity-80 cursor-pointer"
                   style={{ height: `${(item.revenue / maxRevenue) * 100}%` }}
                   title={`₹${item.revenue.toLocaleString()}`}
                 ></div>

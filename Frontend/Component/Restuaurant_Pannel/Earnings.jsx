@@ -229,7 +229,7 @@ const EarningsDashboard = () => {
             <span className="text-sm font-medium text-gray-600 w-16">{day.day}</span>
             <div className="flex-1 mx-4">
               <div 
-                className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-full h-3 transition-all duration-300"
+                className="bg-linear-to-r from-blue-500 to-blue-600 rounded-full h-3 transition-all duration-300"
                 style={{ width: `${(day.revenue / 8000) * 100}%` }}
               ></div>
             </div>
@@ -286,7 +286,7 @@ const EarningsDashboard = () => {
         {hourlySales.map((hour, index) => (
           <div key={index} className="flex flex-col items-center flex-1">
             <div 
-              className="bg-gradient-to-t from-blue-500 to-blue-400 rounded-t-lg w-full transition-all duration-300 hover:from-blue-600 hover:to-blue-500"
+              className="bg-linear-to-t from-blue-500 to-blue-400 rounded-t-lg w-full transition-all duration-300 hover:from-blue-600 hover:to-blue-500"
               style={{ height: `${(hour.sales / 8000) * 100}%` }}
             ></div>
             <span className="text-xs text-gray-600 mt-2">{hour.hour}</span>

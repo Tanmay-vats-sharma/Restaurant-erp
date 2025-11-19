@@ -10,7 +10,7 @@ const Dashboard = ({ darkMode }) => {
     <div className="space-y-6">
       {/* Welcome Banner */}
       <div className={`rounded-2xl p-6 shadow-lg ${
-        darkMode ? 'bg-gradient-to-r from-gray-800 to-gray-700' : 'bg-gradient-to-r from-blue-500 to-purple-500'
+        darkMode ? 'bg-linear-to-r from-gray-800 to-gray-700' : 'bg-linear-to-r from-blue-500 to-purple-500'
       } text-white`}>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
