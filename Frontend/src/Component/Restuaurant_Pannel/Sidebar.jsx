@@ -17,11 +17,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   
   const menuItems = [
-    { id: 'dashboard', name: 'Dashboard', icon: <FiHome className="w-5 h-5" />, path: '/admin/dashboard' },
-    { id: 'orders', name: 'Orders', icon: <FiShoppingCart className="w-5 h-5" />, path: '/admin/orders' },
-    { id: 'menu', name: 'Menu', icon: <FiCoffee className="w-5 h-5" />, path: '/admin/menu' },
-    { id: 'earnings', name: 'Earnings', icon: <FiDollarSign className="w-5 h-5" />, path: '/admin/earnings' },
-    { id: 'settings', name: 'Settings', icon: <FiSettings className="w-5 h-5" />, path: '/admin/settings' },
+    { id: 'dashboard', name: 'Dashboard', icon: <FiHome className="w-5 h-5" />, path: '/restaurant/dashboard' },
+    { id: 'orders', name: 'Orders', icon: <FiShoppingCart className="w-5 h-5" />, path: '/restaurant/orders' },
+    { id: 'menu', name: 'Menu', icon: <FiCoffee className="w-5 h-5" />, path: '/restaurant/menu' },
+    { id: 'earnings', name: 'Earnings', icon: <FiDollarSign className="w-5 h-5" />, path: '/restaurant/earnings' },
+    { id: 'settings', name: 'Settings', icon: <FiSettings className="w-5 h-5" />, path: '/restaurant/settings' },
   ];
 
   return (

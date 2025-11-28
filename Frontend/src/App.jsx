@@ -42,19 +42,18 @@ function AppContent() {
             <Route path="/" element={<MenuComponent />} />
 
             {/* Restuaurant Panel Routes */}
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/orders" element={<OrdersManagement />} />
-            <Route path="/admin/menu" element={<MenuManagement />} />
-            <Route path="/admin/earnings" element={<EarningsDashboard />} />
-            <Route path="/admin/settings" element={<Settings />} />
-
+            <Route path="/restaurant/dashboard" element={<Dashboard />} />
+            <Route path="/restaurant/orders" element={<OrdersManagement />} />
+            <Route path="/restaurant/menu" element={<MenuManagement />} />
+            <Route path="/restaurant/earnings" element={<EarningsDashboard />} />
+            <Route path="/restaurant/settings" element={<Settings />} />
             {/* Admin Panel Routes */}
-            <Route path="/dashboardPage" element={<DashboardPage />} />
-            <Route path="/restaurants" element={<Restaurants />} />
-            <Route path="/menu" element={<MenuItems />} />
-            <Route path="/qr" element={<QRPage />} />
-            <Route path="/plans" element={<PlansPage />} />
-            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/admin/dashboardPage" element={<DashboardPage />} />
+            <Route path="/admin/restaurants" element={<Restaurants />} />
+            <Route path="/admin/menu" element={<MenuItems />} />
+            <Route path="/admin/qr" element={<QRPage />} />
+            <Route path="/admin/plans" element={<PlansPage />} />
+            <Route path="/admin/orders" element={<OrdersPage />} />
 
             {/* Fallback Route */}
             <Route path="*" element={<div>404 - Not Found</div>} />
