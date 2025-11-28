@@ -2,29 +2,29 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 //  Restuaurant Pannel
-import Sidebar from "../Component/Restuaurant_Pannel/Sidebar";
-import Header from "../Component/Restuaurant_Pannel/Header";
-import Dashboard from "../Component/Restuaurant_Pannel/Dashboard";
-import OrdersManagement from "../Component/Restuaurant_Pannel/OrdersManagement";
-import MenuManagement from "../Component/Restuaurant_Pannel/MenuManagement";
-import EarningsDashboard from "../Component/Restuaurant_Pannel/Earnings";
-import Settings from "../Component/Restuaurant_Pannel/Settings";
-import MenuComponent from "../Component/Customer_Pannel/MenuComponent";
+import Sidebar from "./Component/Restuaurant_Pannel/Sidebar";
+import Header from "./Component/Restuaurant_Pannel/Header";
+import Dashboard from "./Component/Restuaurant_Pannel/Dashboard";
+import OrdersManagement from "./Component/Restuaurant_Pannel/OrdersManagement";
+import MenuManagement from "./Component/Restuaurant_Pannel/MenuManagement";
+import EarningsDashboard from "./Component/Restuaurant_Pannel/Earnings";
+import Settings from "./Component/Restuaurant_Pannel/Settings";
+import MenuComponent from "./Component/Customer_Pannel/MenuComponent";
 
 //  Admin Pannel
-import DashboardPage from "../Component/Admin_Pannel/DashboardPage";
-import Restaurants from '../Component/Admin_Pannel/RestaurantsPage'
-import QRPage from "../Component/Admin_Pannel/QRPage";
-import PlansPage from "../Component/Admin_Pannel/PlansPage";
-import OrdersPage from "../Component/Admin_Pannel/OrdersPage";
+import DashboardPage from "./Component/Admin_Pannel/DashboardPage";
+import Restaurants from './Component/Admin_Pannel/RestaurantsPage'
+import QRPage from "./Component/Admin_Pannel/QRPage";
+import PlansPage from "./Component/Admin_Pannel/PlansPage";
+import OrdersPage from "./Component/Admin_Pannel/OrdersPage";
 
-import MenuItems from "../Component/Admin_Pannel/MenuPage";
+import MenuItems from "./Component/Admin_Pannel/MenuPage";
 
 
 function AppContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isAdminRoute = location.pathname.startsWith("/restaurant");
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -48,7 +48,7 @@ function AppContent() {
             <Route path="/restaurant/earnings" element={<EarningsDashboard />} />
             <Route path="/restaurant/settings" element={<Settings />} />
             {/* Admin Panel Routes */}
-            <Route path="/admin/dashboardPage" element={<DashboardPage />} />
+            <Route path="/admin/dashboard" element={<DashboardPage />} />
             <Route path="/admin/restaurants" element={<Restaurants />} />
             <Route path="/admin/menu" element={<MenuItems />} />
             <Route path="/admin/qr" element={<QRPage />} />
